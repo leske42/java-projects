@@ -1,11 +1,15 @@
 package stage1;
+import stage2.ResourceCalculator;
+import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
+        System.out.println("Starting preparation for the space journey");
         checkHealthAndApproveTravelers();
-        processPaymentForJourney();
         calculateRequiredResources();
         checkResources();
+        processPaymentForJourney();
         countdown();
         startSpaceJourney();
     }
@@ -36,8 +40,24 @@ public class Main {
 
     static void calculateRequiredResources() {
         System.out.println("Calculation of required resources for the travelers…");
-        pause();
-        OK();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("How many days is the journey planned for?");
+        int     days = sc.nextInt();
+        System.out.println("How many liters of water are needed per traveler per day?");
+        float   water =  sc.nextFloat();
+        System.out.println("How many kilograms of food are needed per traveler per day?");
+        float   food = sc.nextFloat();
+        System.out.println("How many oxygen tanks are needed per traveler per day?");
+        int     tanks = sc.nextInt();
+        System.out.println("How many people are going on the journey?");
+        int     people = sc.nextInt();
+
+        ResourceCalculator calc = new ResourceCalculator(days, water, food, tanks, people); //so weird that I never need to delete this
+        System.out.println("Total resource requirements for the journey:");
+        System.out.println(calc.getTotalWater() + " liters of water");
+        System.out.println(calc.getTotalFood() + " kilograms of food");
+        System.out.println(calc.getTotalOxygenTanks() + " oxygen tanks");
     }
 
     static void checkResources() {
