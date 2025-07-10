@@ -1,5 +1,7 @@
 package stage1;
 import stage2.ResourceCalculator;
+import stage3.Resources;
+
 import java.util.Scanner;
 
 public class Main {
@@ -52,8 +54,9 @@ public class Main {
         int     tanks = sc.nextInt();
         System.out.println("How many people are going on the journey?");
         int     people = sc.nextInt();
+        Resources resources = new Resources(days, water, food, tanks, people);
 
-        ResourceCalculator calc = new ResourceCalculator(days, water, food, tanks, people); //so weird that I never need to delete this
+        ResourceCalculator calc = new ResourceCalculator(resources); //so weird that I never need to delete this
         System.out.println("Total resource requirements for the journey:");
         System.out.println(calc.getTotalWater() + " liters of water");
         System.out.println(calc.getTotalFood() + " kilograms of food");

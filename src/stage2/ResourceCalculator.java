@@ -1,15 +1,16 @@
 package stage2;
+import stage3.Resources;
 
 public class ResourceCalculator {
     private final float   total_water;
     private final float   total_food;
     private final int     total_tanks;
 
-    public ResourceCalculator(int days, float water, float food, int tanks, int people) {
-        int multiplier = days * people;
-        total_water = water * multiplier;
-        total_food = food * multiplier;
-        total_tanks = tanks * multiplier;
+    public ResourceCalculator(Resources resources) {
+        int multiplier = resources.getDays() * resources.getPeople();
+        total_water = resources.getWater() * multiplier;
+        total_food = resources.getFood() * multiplier;
+        total_tanks = resources.getTanks() * multiplier;
     }
 
     public float getTotalWater() {
