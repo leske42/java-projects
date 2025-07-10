@@ -1,5 +1,7 @@
 package stage1;
 import stage2.ResourceCalculator;
+import stage3.ResourceCheckResult;
+import stage3.ResourceChecker;
 import stage3.Resources;
 
 import java.util.Scanner;
@@ -9,8 +11,11 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Starting preparation for the space journey");
         checkHealthAndApproveTravelers();
-        calculateRequiredResources();
-        checkResources();
+        Resources needed = calculateRequiredResources();
+        Resources available = collectResources();
+        if (!checkResources(needed, available)) {
+            return ;
+        }
         processPaymentForJourney();
         countdown();
         startSpaceJourney();
@@ -40,7 +45,7 @@ public class Main {
         OK();
     }
 
-    static void calculateRequiredResources() {
+    static Resources calculateRequiredResources() {
         System.out.println("Calculation of required resources for the travelers…");
         Scanner sc = new Scanner(System.in);
 
@@ -61,12 +66,35 @@ public class Main {
         System.out.println(calc.getTotalWater() + " liters of water");
         System.out.println(calc.getTotalFood() + " kilograms of food");
         System.out.println(calc.getTotalOxygenTanks() + " oxygen tanks");
+        return resources;
     }
 
-    static void checkResources() {
-        System.out.println("Checking available resources…");
-        pause();
-        OK();
+    static Resources collectResources() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter available liters of water:");
+        float   water =  sc.nextFloat();
+        System.out.println("Enter available kilograms of food:");
+        float   food = sc.nextFloat();
+        System.out.println("Enter available oxygen tanks:");
+        int     tanks = sc.nextInt();
+        return new Resources(-1, water, food, tanks, -1);
+    }
+
+    static boolean checkResources(Resources needed, Resources available) {
+        ResourceChecker checker = new ResourceChecker(available);
+        ResourceCheckResult result = checker.checkResources(needed);
+        if (!result.journeyPossible()) {
+            System.out.print("No, the journey cannot be made for the planned number of days. ");
+            System.out.println("The journey can only last " + result.getPossibleDays() + " days.");
+            return false;
+        }
+        else if (result.hasSurplus()) {
+            System.out.println("Yes, the journey can be made, and it can last " + result.getExtraDays() + " days longer.");
+        }
+        else {
+            System.out.println("Yes, the journey can be made.");
+        }
+        return true;
     }
 
     static void countdown() {
