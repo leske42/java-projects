@@ -7,9 +7,12 @@ public class PaymentProcessor {
         costPerDay = cost;
     }
 
-    public PaymentCheckResult processPayment(PaymentMethod method, int amount) {
-        int days = (int) (amount / costPerDay);
+    public PaymentCheckResult processPayment(PaymentMethod method, int days) {
+        double amount = costPerDay * days;
         boolean possible = method.pay(amount);
-        return new PaymentCheckResult(possible, days, method.getRemainingFunds());
+        int days_possible = -1;
+        if (!possible)
+            days_possible = (int) (method.getRemainingFunds() / costPerDay);
+        return new PaymentCheckResult(possible, days_possible, method.getRemainingFunds());
     }
 }

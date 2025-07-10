@@ -1,9 +1,9 @@
 package stage4;
 
 public class PaymentCheckResult {
-    private boolean fullJourneyAffordable;
-    private int     affordableDays;
-    private double  remainingFunds;
+    private final boolean fullJourneyAffordable;
+    private final int     affordableDays;
+    private final double  remainingFunds;
 
     public PaymentCheckResult(boolean possible, int days, double funds) {
         fullJourneyAffordable = possible;

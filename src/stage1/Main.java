@@ -1,8 +1,7 @@
 package stage1;
 import stage2.ResourceCalculator;
-import stage3.ResourceCheckResult;
-import stage3.ResourceChecker;
-import stage3.Resources;
+import stage3.*;
+import stage4.*;
 
 import java.util.Scanner;
 
@@ -13,10 +12,9 @@ public class Main {
         checkHealthAndApproveTravelers();
         Resources needed = calculateRequiredResources();
         Resources available = collectResources();
-        if (!checkResources(needed, available)) {
+        if (!checkResources(needed, available) || !processPaymentForJourney(needed)) {
             return ;
         }
-        processPaymentForJourney();
         countdown();
         startSpaceJourney();
     }
@@ -35,12 +33,6 @@ public class Main {
 
     static void checkHealthAndApproveTravelers() {
         System.out.println("Health checking of the travelers and approval for the journey...");
-        pause();
-        OK();
-    }
-
-    static void processPaymentForJourney() {
-        System.out.println("Payment for the space journey…");
         pause();
         OK();
     }
@@ -95,6 +87,38 @@ public class Main {
             System.out.println("Yes, the journey can be made.");
         }
         return true;
+    }
+
+    static boolean processPaymentForJourney(Resources needed) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Payment for the space journey");
+        System.out.println("Enter the cost per day of the journey:");
+        double cost = sc.nextDouble();
+        int method = -1;
+        while (!(method == 1 || method == 2)) {
+            System.out.println("Choose payment method:\n1 – Card (2% fee)\n2 – Cash");
+            method = sc.nextInt();
+        }
+        System.out.println("Enter available amount of money:");
+        double money = sc.nextDouble();
+        PaymentMethod payment;
+        if (method == 1)
+            payment = new CardPayment(money);
+        else
+            payment = new CashPayment(money);
+        PaymentProcessor proc = new PaymentProcessor(cost);
+        PaymentCheckResult result = proc.processPayment(payment, needed.getDays());
+        if (result.isFullJourneyAffordable()) {
+            System.out.println("Payment successful. Full journey can be afforded.");
+            System.out.println("They payment was made by " + payment.getMethodName());
+            System.out.println("Remaining funds: " + result.getRemainingFunds());
+            return true;
+        }
+        else if (result.getAffordableDays() > 0)
+            System.out.println("Not enough money for full journey. You can travel for " + result.getAffordableDays() + " days.");
+        else
+            System.out.println("Insufficient funds. The journey cannot be paid for.");
+        return false;
     }
 
     static void countdown() {
