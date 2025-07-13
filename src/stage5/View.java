@@ -2,10 +2,19 @@ package stage5;
 
 import stage3.ResourceCheckResult;
 import stage3.Resources;
+import stage4.CardPayment;
+import stage4.CashPayment;
+import stage4.PaymentCheckResult;
+import stage4.PaymentMethod;
 
 import java.util.Scanner;
 
 public class View {
+
+    public static void displayPrologue() {
+        System.out.println("Starting preparation for the space journey");
+        checkHealthAndApproveTravelers();
+    }
 
     public static void checkHealthAndApproveTravelers() {
         System.out.println("Health checking of the travelers and approval for the journey...");
@@ -59,6 +68,38 @@ public class View {
         else {
             System.out.println("Yes, the journey can be made.");
         }
+    }
+
+    static PaymentInfo collectPaymentMethod() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Payment for the space journey");
+        System.out.println("Enter the cost per day of the journey:");
+        double cost = sc.nextDouble();
+        int method = -1;
+        while (!(method == 1 || method == 2)) {
+            System.out.println("Choose payment method:\n1 – Card (2% fee)\n2 – Cash");
+            method = sc.nextInt();
+        }
+        System.out.println("Enter available amount of money:");
+        double money = sc.nextDouble();
+        return new PaymentInfo(cost, method, money);
+    }
+
+    static void displayPaymentResult(PaymentInfo info, PaymentCheckResult result) {
+        if (result.isFullJourneyAffordable()) {
+            System.out.println("Payment successful. Full journey can be afforded.");
+            System.out.println("They payment was made by " + info.getMethodName());
+            System.out.println("Remaining funds: " + result.getRemainingFunds());
+        }
+        else if (result.getAffordableDays() > 0)
+            System.out.println("Not enough money for full journey. You can travel for " + result.getAffordableDays() + " days.");
+        else
+            System.out.println("Insufficient funds. The journey cannot be paid for.");
+    }
+
+    static void displayEpilogue() {
+        countdown();
+        startSpaceJourney();
     }
 
     private static void pause() {
