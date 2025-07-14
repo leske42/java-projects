@@ -46,7 +46,7 @@ public class View {
         System.out.println(resources.getTanks() + " oxygen tanks");
     }
 
-    static Resources collectAvailableResources() {
+    public static Resources collectAvailableResources() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter available liters of water:");
         float   water =  sc.nextFloat();
@@ -70,7 +70,7 @@ public class View {
         }
     }
 
-    static PaymentInfo collectPaymentMethod() {
+    public static PaymentInfo collectPaymentMethod() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Payment for the space journey");
         System.out.println("Enter the cost per day of the journey:");
@@ -85,7 +85,7 @@ public class View {
         return new PaymentInfo(cost, method, money);
     }
 
-    static void displayPaymentResult(PaymentInfo info, PaymentCheckResult result) {
+    public static void displayPaymentResult(PaymentInfo info, PaymentCheckResult result) {
         if (result.isFullJourneyAffordable()) {
             System.out.println("Payment successful. Full journey can be afforded.");
             System.out.println("They payment was made by " + info.getMethodName());
@@ -97,7 +97,7 @@ public class View {
             System.out.println("Insufficient funds. The journey cannot be paid for.");
     }
 
-    static void displayEpilogue() {
+    public static void displayEpilogue() {
         countdown();
         startSpaceJourney();
     }

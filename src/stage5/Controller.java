@@ -5,21 +5,29 @@ import stage3.Resources;
 import stage4.PaymentCheckResult;
 
 public class Controller {
-    public static void run() {
-            View.displayPrologue();
-            Resources raw_needed = View.askforRequiredResources();
-            Resources total_needed = Model.calculateRequiredResources(raw_needed);
-            View.displayRequiredResources(total_needed);
-            Resources available = View.collectAvailableResources();
-            ResourceCheckResult journey_status = Model.checkResources(raw_needed, available);
-            View.displayPossibilityOfJourney(journey_status);
+    private final View view;
+    private final Model model;
+
+    public Controller(View view, Model model) {
+        this.view = view;
+        this.model = model;
+    }
+
+    public void run() {
+            view.displayPrologue();
+            Resources raw_needed = view.askforRequiredResources();
+            Resources total_needed = model.calculateRequiredResources(raw_needed);
+            view.displayRequiredResources(total_needed);
+            Resources available = view.collectAvailableResources();
+            ResourceCheckResult journey_status = model.checkResources(raw_needed, available);
+            view.displayPossibilityOfJourney(journey_status);
             if (!journey_status.journeyPossible())
                 return;
-            PaymentInfo payment_info = View.collectPaymentMethod();
-            PaymentCheckResult payment_status = Model.processPaymentForJourney(payment_info, raw_needed);
-            View.displayPaymentResult(payment_info, payment_status);
+            PaymentInfo payment_info = view.collectPaymentMethod();
+            PaymentCheckResult payment_status = model.processPaymentForJourney(payment_info, raw_needed);
+            view.displayPaymentResult(payment_info, payment_status);
             if (!payment_status.isFullJourneyAffordable())
                 return;
-            View.displayEpilogue();
+            view.displayEpilogue();
     }
 }
