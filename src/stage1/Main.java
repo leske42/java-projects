@@ -1,12 +1,17 @@
 package stage1;
 
+import stage2.CrewManager;
+
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        CrewManager crewManager = new CrewManager();
         System.out.println("Welcome, Captain! Prepare for adventure in the galaxy.");
+        int totalPoints = 0;
         while (true) {
             System.out.println("\nMain Menu:");
             System.out.println("1 - View Crew\n2 - Launch a raid");
@@ -16,7 +21,7 @@ public class Main {
             int choice = sc.nextInt();
             switch (choice) {
                 case 1:
-                    viewCrew();
+                    crewManager.viewCrew(totalPoints);
                     break;
                 case 2:
                     launchRaid(sc);

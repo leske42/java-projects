@@ -21,12 +21,13 @@ public class CrewManager {
         }
     }
 
-    public void viewCrew() {
+    public void viewCrew(int points) {
         System.out.println("\n[Crew Information]");
         if (crewSize == 0)
             System.out.println("Crew is empty"); //tho this will likely never happen
         for (int i = 0; i < crewSize; i++) {
             System.out.println(crew[i].getInfo());
         }
+        System.out.println("Total points: " + points);
     }
 }
