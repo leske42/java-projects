@@ -55,20 +55,6 @@ public class Main {
         return random.nextInt(1, 4); //bound is exclusive
     }
 
-    private enum RaidOutcome {
-        VICTORY,
-        DEFEAT,
-        PEACE;
-        public String getDescriptionByValue(int value) {
-            return switch (value) {
-                case 1 -> "Victory";
-                case 2 -> "Defeat";
-                case 3 -> "Peace agreement";
-                default -> "Unknown";
-            };
-        }
-    }
-
     private static void launchRaid(Scanner sc) {
         System.out.println("\nSelect Raid Target:");
         System.out.println("1. Civilian Ship\n2. Military Ship\n3. Unknown Vessel");
