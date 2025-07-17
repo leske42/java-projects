@@ -41,7 +41,7 @@ public class CrewManager {
         return crewCopy;
     }
 
-    int getCrewCount() {
+    public int getCrewCount() {
         return crewSize;
     }
 }
