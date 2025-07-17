@@ -30,4 +30,18 @@ public class CrewManager {
         }
         System.out.println("Total points: " + points);
     }
+
+    public ICrewMember[] getCrew() {
+        ICrewMember[] crewCopy = new ICrewMember[crewSize];
+        int j = 0;
+        for (ICrewMember member : crew) {
+            if (member != null)
+                crewCopy[j++] = member;
+        }
+        return crewCopy;
+    }
+
+    int getCrewCount() {
+        return crewSize;
+    }
 }
