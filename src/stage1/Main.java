@@ -1,10 +1,16 @@
 package stage1;
 
+import com.sun.jdi.connect.Connector;
 import stage2.Captain;
 import stage2.CombatPirate;
 import stage2.CrewManager;
 import stage2.ICrewMember;
+import stage3.Raid;
+import stage3.RaidResult;
+import stage3.RaidTarget;
+import stage3.ShipSystemsManager;
 
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,6 +22,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         CrewManager crewManager = new CrewManager();
+        ShipSystemsManager systemsManager = new ShipSystemsManager();
         System.out.println("Welcome, Captain! Prepare for adventure in the galaxy.");
         int totalPoints = 1000;
         while (true) {
@@ -30,7 +37,7 @@ public class Main {
                     crewManager.viewCrew(totalPoints);
                     break;
                 case 2:
-                    launchRaid(sc);
+                    totalPoints += launchRaid(sc, crewManager, systemsManager, totalPoints);
                     break;
                 case 3:
                     repairSystems();
@@ -55,26 +62,39 @@ public class Main {
         return random.nextInt(1, 4); //bound is exclusive
     }
 
-    private static void launchRaid(Scanner sc) {
+    private static int launchRaid(Scanner sc, CrewManager crew, ShipSystemsManager systems, int points) {
         System.out.println("\nSelect Raid Target:");
         System.out.println("1. Civilian Ship\n2. Military Ship\n3. Unknown Vessel");
         System.out.print("Your choice: ");
-        int target = sc.nextInt();
+        int value = sc.nextInt();
+        RaidTarget target = RaidTarget.fromValue(value);
         System.out.print("Launching observation raid on ");
         switch (target) {
-            case 1:
+            case CIVILIAN:
                 System.out.println("Civilian Ship...");
                 break;
-             case 2:
+            case MILITARY:
                  System.out.println("Military Ship...");
                  break;
-             case 3:
+            case UNKNOWN:
                  System.out.println("Unknown Vessel...");
                  break;
              default:
                  System.out.println("Invalid choice");
+                 return 0;
         }
+        Raid raid = new Raid();
+        RaidResult result = raid.executeRaid(target, crew, systems);
         System.out.println("Raid outcome: " + RaidOutcome.VICTORY.getDescriptionByValue(generateRaidOutcome()));
+        printResult(result, crew, systems, points);
+        return result.getPointsEarned();
+    }
+
+    private static void printResult(RaidResult result, CrewManager crew, ShipSystemsManager systems, int points) {
+        System.out.println("\n[RAID RESULTS]\nPoints earned: " + result.getPointsEarned());
+        System.out.println("Raid type was: " + result.getRaidType() + "\nShip attacked was: " + result.getTargetType());
+        crew.viewCrew(points + result.getPointsEarned());
+        System.out.println("System status: " + systems.getStatus());
     }
 
     private static void repairSystems() {

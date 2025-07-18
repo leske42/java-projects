@@ -5,7 +5,7 @@ import stage2.CrewManager;
 
 public class Raid {
     private final Random random = new Random();
-    RaidResult executeRaid(RaidTarget target, CrewManager crewManager, ShipSystemsManager systemsManager) {
+    public RaidResult executeRaid(RaidTarget target, CrewManager crewManager, ShipSystemsManager systemsManager) {
         RaidType type = getRandomRaidType();
         int points = applyTargetModifierToPoints(type.generatePoints(), target);
         int[] health_loss = new int[crewManager.getCrewCount()];

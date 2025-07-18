@@ -19,4 +19,28 @@ public class RaidResult {
         this.crewHealthLoss = crewHealthLoss;
         this.crewMembers = crewMembers;
     }
+
+    public RaidType getRaidType() {
+        return raidType;
+    }
+
+    public RaidTarget getTargetType() {
+        return targetType;
+    }
+
+    public int getPointsEarned() {
+        return pointsEarned;
+    }
+
+    public int[] getSystemDamage() {
+        return systemDamage;
+    }
+
+    public int[] getCrewHealthLoss() {
+        return crewHealthLoss;
+    }
+
+    public ICrewMember[] getCrewMembers() {
+        return crewMembers;
+    }
 }

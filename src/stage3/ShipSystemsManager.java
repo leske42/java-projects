@@ -6,7 +6,7 @@ public class ShipSystemsManager {
     //so does final only apply to array size and not elements?
     private final int[] systemHealth = new int[ShipSystemType.values().length];
 
-    ShipSystemsManager() {
+    public ShipSystemsManager() {
         for (ShipSystemType type : ShipSystemType.values()) {
             systemHealth[type.ordinal()] = 100;
         }
@@ -26,7 +26,7 @@ public class ShipSystemsManager {
         }
     }
 
-    String getStatus() {
+    public String getStatus() {
         return "Weapons: " + systemHealth[0] + "%\nNavigation: " + systemHealth[1] + "%\nLife Support: " + systemHealth[2] + "%";
     }
 }

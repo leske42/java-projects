@@ -2,7 +2,7 @@ package stage3;
 
 public enum RaidTarget {
     CIVILIAN (1, "Civilian ship"),
-    MILITARY (1, "Military ship"),
+    MILITARY (2, "Military ship"),
     UNKNOWN (3, "Unknown vessel");
 
     private final int value;
@@ -17,7 +17,7 @@ public enum RaidTarget {
         return name;
     }
 
-    static RaidTarget fromValue(int value) {
+    public static RaidTarget fromValue(int value) {
         for (RaidTarget type : RaidTarget.values()) {
             if (type.value == value)
                 return type;
