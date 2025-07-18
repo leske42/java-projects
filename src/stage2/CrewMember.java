@@ -20,4 +20,11 @@ public abstract class CrewMember implements ICrewMember {
     public String getInfo() {
         return (getRole() + ": " + getName() + " (Life: " + getHealth() + "%)");
     }
+
+    public void reduceHealth(int amount) {
+        health -= amount;
+        if (health < 0) {
+            health = 0;
+        }
+    }
 }

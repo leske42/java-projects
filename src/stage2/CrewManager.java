@@ -31,6 +31,12 @@ public class CrewManager {
         System.out.println("Total points: " + points);
     }
 
+    public void applyHealthLoss(int[] healthLoss) {
+        for (int i = 0; i < crewSize; i++) {
+            crew[i].reduceHealth(healthLoss[i]);
+        }
+    }
+
     public ICrewMember[] getCrew() {
         ICrewMember[] crewCopy = new ICrewMember[crewSize];
         int j = 0;

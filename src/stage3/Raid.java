@@ -12,7 +12,7 @@ public class Raid {
         for (int i = 0; i < health_loss.length; i++) {
             health_loss[i] = generateHealthLoss(type);
         }
-        //apply health loss here?
+        crewManager.applyHealthLoss(health_loss);
         int[] damage = new int[ShipSystemType.values().length];
         for (int i = 0; i < damage.length; i++) {
             damage[i] = generateSystemDamage(type);

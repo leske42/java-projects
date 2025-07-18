@@ -67,34 +67,22 @@ public class Main {
         System.out.println("1. Civilian Ship\n2. Military Ship\n3. Unknown Vessel");
         System.out.print("Your choice: ");
         int value = sc.nextInt();
-        RaidTarget target = RaidTarget.fromValue(value);
-        System.out.print("Launching observation raid on ");
-        switch (target) {
-            case CIVILIAN:
-                System.out.println("Civilian Ship...");
-                break;
-            case MILITARY:
-                 System.out.println("Military Ship...");
-                 break;
-            case UNKNOWN:
-                 System.out.println("Unknown Vessel...");
-                 break;
-             default:
-                 System.out.println("Invalid choice");
-                 return 0;
+        if (value < 1 || value > 3) {
+            System.out.println("Invalid choice");
+            return 0;
         }
+        RaidTarget target = RaidTarget.fromValue(value);
         Raid raid = new Raid();
         RaidResult result = raid.executeRaid(target, crew, systems);
-        System.out.println("Raid outcome: " + RaidOutcome.VICTORY.getDescriptionByValue(generateRaidOutcome()));
         printResult(result, crew, systems, points);
         return result.getPointsEarned();
     }
 
     private static void printResult(RaidResult result, CrewManager crew, ShipSystemsManager systems, int points) {
-        System.out.println("\n[RAID RESULTS]\nPoints earned: " + result.getPointsEarned());
-        System.out.println("Raid type was: " + result.getRaidType() + "\nShip attacked was: " + result.getTargetType());
+        System.out.println("\n[Raid Summary]");
+        System.out.println("Target: " + result.getTargetType() + "\nRaid type: " + result.getRaidType() + "\nPoints earned: " + result.getPointsEarned());
         crew.viewCrew(points + result.getPointsEarned());
-        System.out.println("System status: " + systems.getStatus());
+        System.out.println("\nSystems status after raid:\n" + systems.getStatus());
     }
 
     private static void repairSystems() {
