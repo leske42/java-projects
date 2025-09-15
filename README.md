@@ -1,4 +1,12 @@
-## How to combine different repos into one (while preserving commit histoy)
+I have created these projects at a 2 weeks Java-training at [NIX](https://nixstech.com/) company.
+
+In my experience switching to Java after C++ is quite straightforward & relatively smooth experience. I did not go *very deep* into Java but the basics are quite similar. The setup of the infrastructure necessary for development can be a bit of a challenge at first, but I used IntelliJ IDEA and it proved to be super helpful.
+
+I will make also some little note of all of the theory we have learned.
+
+Since these were originally different tiny repos that I merged into one, I have added a tiny guide on how to do that. (There is of course a simple way of copy and paste, but I wanted to preserve my the commit histories of both of the small repositories).
+
+### How to combine different repos into one (while preserving commit histoy)
 
 First create new repo where you want to combine your projects if you don't have it already.
 You can also use one of your existing repos which hosts one of the projects, then you can skip this step.
