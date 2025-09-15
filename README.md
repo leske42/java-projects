@@ -23,14 +23,19 @@ So here is 4 most important principles of OOP:
 - **Inheritance**
     - inheritance means you have classes that are *based on* other classes (they have all of the data those ones have & more). This also creates a sort of hierarchy between your classes. This one is also called **is-a** relationship: a `Square` *is a* `Rectangle` which *is a* `Shape` (and naturally this means that a `Square` *is also a* `Shape`).
 - **Polymorphism**
-    - polymorphism takes advantage of inheritance. Very simply put, it's the use of a single symbol to represent multiple different types. This way different objects can be used by the same interface (interface here used in a broad sense). For example you can have a `Dog` or a `Cat` object all accessed through `Animal` interface. This helps a lot with making your code extendable, because if something holds an `Animal` object instead of a specific subtype, you can later introduce other animals like `Duck` or `Bat` without needing to refactor already existing code.
+    - polymorphism takes advantage of inheritance. Very simply put, it's the use of a single symbol to represent multiple different types. This way different objects can be used by the same interface (interface here used in a broad sense). For example you can have a `Dog` or a `Cat` object all accessed through `Animal` interface. This helps a lot with making your code extendable, because if something holds an `Animal` instead of a specific subtype, you can later introduce other animals like `Duck` or `Bat` without needing to refactor already existing code.
 
 Another set of important principles to follow (which can be shortened to **SOLID**):
 - **S**ingle Responsibility
+    - this sounds the most simple principle but it's the hardest to follow in practice. Requires a lot of design effort. In theory each class should only be responsible for one thing. What qualifies as "one thing" is sometimes a question in practice.
 - **O**pen/Closed Principle
+    - the code you write should be open for extension, but closed for modification. This means *you should be able to add new behavior without rewriting existing code.* Using the `Animal` interface like I have mentioned earlier is a good example of this.
 - **L**iskov Substitution
+    - this means objects of a parent class should be replaceable with objects of its sub classes without breaking the program. For example, in C++, since `private` members of a parent class are inaccessible to a sub class, a `private` function in the parent class would miss from the sub class, so it could not be used *as if it was the parent* and thus this principle would be broken (so better to use `protected` keyword but this repo is not about C++).
 - **I**nterface Segregation
+    - you should have multiple tiny interfaces which each of them a few methods implemented, instead of big monolithic ones. This is because, as it comes from the previous principle, it is not good if a class inherits from an interface but there are some functions it gets that it doesn't end up using in the end. Instead, using **multiple inheritance**, you can opt to inherit from multiple smaller interfaces and pick and choose the functionalities you need.
 - **D**ependency Inversion
+    - to be honest it's not super clear to me what is the difference between this and just Polymorphism + Open/Close combined. Anyway it means that high-level code should not depend on low-level details, but instead both should rely on abstractions. This makes the system flexible, because the specific low-level parts (like a database for example), so how the exact implementation is done can be swapped without changing the core logic.
 
 ### How to combine different repos into one (while preserving commit histoy)
 
