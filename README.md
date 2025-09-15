@@ -1,13 +1,16 @@
-I have created these projects at a 2 weeks Java-training at [NIX](https://nixstech.com/) company.
+I have created these projects at a 2 weeks Java training at [NIX](https://nixstech.com/) company.
 
 In my experience switching to Java after C++ is quite straightforward & relatively smooth experience. I did not go *very deep* into Java but the basics are quite similar. The setup of the infrastructure necessary for development can be a bit of a challenge at first, but I used IntelliJ IDEA and it proved to be super helpful.
 
-I will make also some little note of all of the theory we have learned.
+I will make also some little note of the theory we have learned.
 
-Since these were originally different tiny repos that I merged into one, I have added a tiny guide on how to do that. (There is of course a simple way of copy and paste, but I wanted to preserve my the commit histories of both of the small repositories).
+Since these were originally different tiny repos that I merged into one, I have added a short guide on how to do that. (There is of course just the simple way of copy and paste, but I wanted to preserve my the commit histories of both of the small repositories).
 
 ### Specifics of Java language
 
+Some key things that make Java language special:
+- it follows a paradigm of **Write Once, Run Anywhere** (WORA). It *is* a compiled language, but the Java compiler `javac` doesn't translate your code to run on a specific architecture. Instead the byte-code written by `javac` runs on a virtual machine called JVM. Everywhere, where you can install the JVM, you will be able to run your code, so this makes it very portable. This is also the main setback of the language, because it requires a quite bulky infrastructure to run.
+- Java is super object-oriented. I think the whole language was written with the goal in mind to become a very convenient tool for OOP. An interesting thing that comes from this is that **in Java, everything is a class**. In my code you can see that we also have a `Main` class which needs to have a `public static` main function (this is necessery, since you have no option to instantiate this class as an object, you could only do that *from your code* but `main` needs to be called before that).
 
 ### OOP Principles
 
@@ -18,6 +21,7 @@ Most of OOP principles serve this purpose. Java is a good *tool* because by desi
 So here is 4 most important principles of OOP:
 - **Encapsulation**
     - this principle means you group all of your related data (functions, variables) into a single unit (these are the **objects**). It also means that everything that is only needed for the internal workings of this object (like helper functions) should not be accessible from the outside (see `private`keyword for this).
+    - coming from this principle, we were also encouraged to use `POJO`s in our code (this is short for Plain Old Java object). These are classes with only `private final` variables, a constructor and getters/setters inside. Their job is to store data and act as the tool of communication between other classes. Instead of passing invidual variables as multiple arguments between each other, they will pass these POJOs that are loaded with data in a compact way.
 - **Abstraction**
     - this means when developing a class, we should hide as much of the implementation details as possible. If we have an object `Machine` that performs some calculation, it is best if from the outside we only need to do a simple `Machine.calculate()` instead of instructing it to do all the steps of calculation one by one.
 - **Inheritance**
