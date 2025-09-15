@@ -16,10 +16,14 @@ For me it was very good experience that our teachers always said they are more i
 Most of OOP principles serve this purpose. Java is a good *tool* because by design it makes it really easy to implement these principles in practice, but the importance still lies in the principles and not the language itself (just like I have also used some of these principles in my C++ projects before).
 
 So here is 4 most important principles of OOP:
-- Abstraction
-- Encapsulation
-- Inheritance
-- Polymorphism
+- **Encapsulation**
+    - this principle means you group all of your related data (functions, variables) into a single unit (these are the **objects**). It also means that everything that is only needed for the internal workings of this object (like helper functions) should not be accessible from the outside (see `private`keyword for this).
+- **Abstraction**
+    - this means when developing a class, we should hide as much of the implementation details as possible. If we have an object `Machine` that performs some calculation, it is best if from the outside we only need to do a simple `Machine.calculate()` instead of instructing it to do all the steps of calculation one by one.
+- **Inheritance**
+    - inheritance means you have classes that are *based on* other classes (they have all of the data those ones have & more). This also creates a sort of hierarchy between your classes. This one is also called **is-a** relationship: a `Square` *is a* `Rectangle` which *is a* `Shape` (and naturally this means that a `Square` *is also a* `Shape`).
+- **Polymorphism**
+    - polymorphism takes advantage of inheritance. Very simply put, it's the use of a single symbol to represent multiple different types. This way different objects can be used by the same interface (interface here used in a broad sense). For example you can have a `Dog` or a `Cat` object all accessed through `Animal` interface. This helps a lot with making your code extendable, because if something holds an `Animal` object instead of a specific subtype, you can later introduce other animals like `Duck` or `Bat` without needing to refactor already existing code.
 
 Another set of important principles to follow (which can be shortened to **SOLID**):
 - **S**ingle Responsibility
