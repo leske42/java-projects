@@ -4,7 +4,7 @@ In my experience switching to Java after C++ is quite straightforward & relative
 
 I will make also some little note of the theory we have learned.
 
-Since these were originally different tiny repos that I merged into one, I have added a short guide on how to do that. (There is of course just the simple way of copy and paste, but I wanted to preserve my the commit histories of both of the small repositories).
+Since these were originally different tiny repos that I merged into one, I have added a short [guide](#how-to-combine-different-repos-into-one-while-preserving-commit-history) on how to do that. (There is of course just the simple way of copy and paste, but I wanted to preserve my the commit histories of both of the small repositories).
 
 ### Specifics of Java language
 
@@ -41,7 +41,7 @@ Another set of important principles to follow (which can be shortened to **SOLID
 - **D**ependency Inversion
     - to be honest it's not super clear to me what is the difference between this and just Polymorphism + Open/Close combined. Anyway it means that high-level code should not depend on low-level details, but instead both should rely on abstractions. This makes the system flexible, because the specific low-level parts (like a database for example), so how the exact implementation is done can be swapped without changing the core logic.
 
-### How to combine different repos into one (while preserving commit histoy)
+### How to combine different repos into one (while preserving commit history)
 
 First create new repo where you want to combine your projects if you don't have it already.
 You can also use one of your existing repos which hosts one of the projects, then you can skip this step.
