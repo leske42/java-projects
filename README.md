@@ -6,6 +6,28 @@ I will make also some little note of all of the theory we have learned.
 
 Since these were originally different tiny repos that I merged into one, I have added a tiny guide on how to do that. (There is of course a simple way of copy and paste, but I wanted to preserve my the commit histories of both of the small repositories).
 
+### Specifics of Java language
+
+
+### OOP Principles
+
+For me it was very good experience that our teachers always said they are more interested in how we structure our code, than specific features of the language. As one can also read in Clean Architecture book, OOP mainly exists to make projects *scalable*. So make it easy to refactor and easy to improve with new features without making everything more and more complicated and harder to follow & maintain.
+
+Most of OOP principles serve this purpose. Java is a good *tool* because by design it makes it really easy to implement these principles in practice, but the importance still lies in the principles and not the language itself (just like I have also used some of these principles in my C++ projects before).
+
+So here is 4 most important principles of OOP:
+- Abstraction
+- Encapsulation
+- Inheritance
+- Polymorphism
+
+Another set of important principles to follow (which can be shortened to **SOLID**):
+- **S**ingle Responsibility
+- **O**pen/Closed Principle
+- **L**iskov Substitution
+- **I**nterface Segregation
+- **D**ependency Inversion
+
 ### How to combine different repos into one (while preserving commit histoy)
 
 First create new repo where you want to combine your projects if you don't have it already.
